@@ -31,19 +31,43 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  final jansen = ['👊', '✌️', '✋'];
-  int randomJan = 0;
+  final jansen = ['👊', '✌️', '✋', ''];
+  int randomJan = 3;
+  String userHand = '';
+  String result = '';
 
-  run() {
+//TODO: 連勝数を記述する
+  run(String userHandNow) {
     var random = math.Random();
     setState(() {
       randomJan = random.nextInt(3);
+      userHand = userHandNow;
+      if (jansen[randomJan] == userHand) {
+        result = '結果： 引き分け';
+      } else if (jansen[randomJan] == '👊' && userHand == '✋' ||
+          jansen[randomJan] == '✋' && userHand == '✌️' ||
+          jansen[randomJan] == '✌️' && userHand == '👊') {
+        result = '結果： あなたの勝利！';
+      } else if (jansen[randomJan] == '✋' && userHand == '👊' ||
+          jansen[randomJan] == '👊' && userHand == '✌️' ||
+          jansen[randomJan] == '✌️' && userHand == '✋') {
+        result = '結果： 残念負けです';
+      }
+    });
+  }
+
+  reset() {
+    setState(() {
+      randomJan = 3;
+      result = '';
+      userHand = '';
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    //TODO: ゲーム画面の前にスタート画面を作成する
+    //TODO: 連勝ランキングに遷移する画面もあると良い
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -53,6 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              result,
+              style: TextStyle(fontSize: 30),
+            ),
             const Text(
               '相手',
               style: TextStyle(fontSize: 30),
@@ -68,18 +96,48 @@ class _MyHomePageState extends State<MyHomePage> {
               '自分',
               style: TextStyle(fontSize: 30),
             ),
-            const Text(
-              '👊',
+            Text(
+              userHand,
               style: TextStyle(fontSize: 200),
             ),
+            Center(
+                child: Row(
+              //TODO: 3つのボタンを中心にする
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    run('👊');
+                  },
+                  child: const Text('👊'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    run('✌️');
+                  },
+                  child: const Text('✌️'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    run('✋');
+                  },
+                  child: const Text('✋'),
+                )
+              ],
+            )),
+            ElevatedButton(
+              onPressed: () {
+                reset();
+              },
+              child: const Text('リセット'),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: run,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: (){}),
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
