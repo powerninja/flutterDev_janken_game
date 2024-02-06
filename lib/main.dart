@@ -37,8 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   run() {
     var random = math.Random();
-    randomJan = random.nextInt(3);
-    print(jansen[randomJan]);
+    setState(() {
+      randomJan = random.nextInt(3);
+    });
   }
 
   @override
