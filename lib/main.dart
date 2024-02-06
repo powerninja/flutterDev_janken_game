@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 void main() {
   runApp(const MyApp());
@@ -31,11 +32,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  final jansen = ['👊', '✌️', '✋'];
+  int randomJan = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  run() {
+    var random = math.Random();
+    randomJan = random.nextInt(3);
+    print(jansen[randomJan]);
   }
 
   @override
@@ -45,31 +48,36 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('じゃんけん✊'),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               '相手',
               style: TextStyle(fontSize: 30),
             ),
             Text(
-              '✌️',
+              jansen[randomJan],
               style: TextStyle(fontSize: 100),
             ),
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
-            Text(
+            const Text(
               '自分',
               style: TextStyle(fontSize: 30),
             ),
-            Text(
+            const Text(
               '👊',
               style: TextStyle(fontSize: 200),
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: run,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
       ),
     );
   }
