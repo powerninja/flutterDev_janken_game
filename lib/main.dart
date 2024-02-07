@@ -35,8 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int randomJan = 3;
   String userHand = '';
   String result = '';
+  int consecutiveVictories = 0;
 
-//TODO: 連勝数を記述する
   run(String userHandNow) {
     var random = math.Random();
     setState(() {
@@ -48,10 +48,12 @@ class _MyHomePageState extends State<MyHomePage> {
           jansen[randomJan] == '✋' && userHand == '✌️' ||
           jansen[randomJan] == '✌️' && userHand == '👊') {
         result = '結果： あなたの勝利！';
+        consecutiveVictories++;
       } else if (jansen[randomJan] == '✋' && userHand == '👊' ||
           jansen[randomJan] == '👊' && userHand == '✌️' ||
           jansen[randomJan] == '✌️' && userHand == '✋') {
         result = '結果： 残念負けです';
+        consecutiveVictoriesReset();
       }
     });
   }
@@ -61,13 +63,21 @@ class _MyHomePageState extends State<MyHomePage> {
       randomJan = 3;
       result = '';
       userHand = '';
+      consecutiveVictoriesReset();
     });
+  }
+
+//負けた際や、リセットボタンを押下した際に連勝数を0にする
+  consecutiveVictoriesReset() {
+    consecutiveVictories = 0;
   }
 
   @override
   Widget build(BuildContext context) {
     //TODO: ゲーム画面の前にスタート画面を作成する
     //TODO: 連勝ランキングに遷移する画面もあると良い
+    //TODO: どこかに過去の連勝記録の値を保存する
+    //TODO: CPUが悩む動作などあればよさそう
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -81,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
               result,
               style: TextStyle(fontSize: 30),
             ),
+            Text('$consecutiveVictories連勝'),
             const Text(
               '相手',
               style: TextStyle(fontSize: 30),
@@ -133,11 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: (){}),
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton(onPressed: () {}),
     );
   }
 }
