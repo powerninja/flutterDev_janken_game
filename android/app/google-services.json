@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "492804550546",
+    "project_id": "janken-b9205",
+    "storage_bucket": "janken-b9205.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492804550546:android:e6dfea4d19462f92861b4b",
+        "android_client_info": {
+          "package_name": "com.example.janken_game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRPLcaDoQiPbZcWO1nlmit6c1zyAo-mVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
