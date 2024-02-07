@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     //TODO: ゲーム画面の前にスタート画面を作成する
     //TODO: 連勝ランキングに遷移する画面もあると良い
-    //↑はスマホローカルに保存する
+    //↓はスマホローカルに保存する
     //TODO: どこかに過去の連勝記録の値を保存する
     //TODO: CPUが悩む動作などあればよさそう
     //TODO: ルーレット機能など
