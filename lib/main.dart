@@ -78,8 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     //TODO: ゲーム画面の前にスタート画面を作成する
     //TODO: 連勝ランキングに遷移する画面もあると良い
+    //↑はスマホローカルに保存する
     //TODO: どこかに過去の連勝記録の値を保存する
     //TODO: CPUが悩む動作などあればよさそう
+    //TODO: ルーレット機能など
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -115,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Center(
                 child: Row(
-              //TODO: 3つのボタンを中心にする
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: () {
@@ -123,12 +125,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: const Text('👊'),
                 ),
+                const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () {
                     run('✌️');
                   },
                   child: const Text('✌️'),
                 ),
+                const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () {
                     run('✋');
