@@ -33,28 +33,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String userHand = '❓';
+  String myHand = '❓';
   String result = '';
   int consecutiveVictories = 0;
   String rivalHand = '❓';
 
-  run(String userHandNow) {
+  run(String myHandNow) {
     var random = math.Random();
     setState(() {
       final randomJan = random.nextInt(3);
-      userHand = userHandNow;
+      myHand = myHandNow;
 
       rivalHand = Hand.values[randomJan].text;
-      if (rivalHand == userHand) {
+      if (rivalHand == myHand) {
         result = Result.draw.text;
-      } else if (rivalHand == '👊' && userHand == '✋' ||
-          rivalHand == '✋' && userHand == '✌️' ||
-          rivalHand == '✌️' && userHand == '👊') {
+      } else if (rivalHand == '👊' && myHand == '✋' ||
+          rivalHand == '✋' && myHand == '✌️' ||
+          rivalHand == '✌️' && myHand == '👊') {
         result = Result.win.text;
         consecutiveVictories++;
-      } else if (rivalHand == '✋' && userHand == '👊' ||
-          rivalHand == '👊' && userHand == '✌️' ||
-          rivalHand == '✌️' && userHand == '✋') {
+      } else if (rivalHand == '✋' && myHand == '👊' ||
+          rivalHand == '👊' && myHand == '✌️' ||
+          rivalHand == '✌️' && myHand == '✋') {
         result = Result.lose.text;
         consecutiveVictoriesReset();
       }
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   reset() {
     setState(() {
       result = '';
-      userHand = '❓';
+      myHand = '❓';
       rivalHand = '❓';
       consecutiveVictoriesReset();
     });
@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(fontSize: 30),
             ),
             Text(
-              userHand,
+              myHand,
               style: TextStyle(fontSize: 200),
             ),
             Center(
