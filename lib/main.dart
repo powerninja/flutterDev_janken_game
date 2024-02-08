@@ -33,27 +33,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final jansen = ['👊', '✌️', '✋', '❓'];
-  int randomJan = 3;
   String userHand = '❓';
   String result = '';
   int consecutiveVictories = 0;
+  String rivalHand = '❓';
 
   run(String userHandNow) {
     var random = math.Random();
     setState(() {
-      randomJan = random.nextInt(3);
+      final randomJan = random.nextInt(3);
       userHand = userHandNow;
-      if (jansen[randomJan] == userHand) {
+
+      rivalHand = Hand.values[randomJan].text;
+      if (rivalHand == userHand) {
         result = '結果： 引き分け';
-      } else if (jansen[randomJan] == '👊' && userHand == '✋' ||
-          jansen[randomJan] == '✋' && userHand == '✌️' ||
-          jansen[randomJan] == '✌️' && userHand == '👊') {
+      } else if (rivalHand == '👊' && userHand == '✋' ||
+          rivalHand == '✋' && userHand == '✌️' ||
+          rivalHand == '✌️' && userHand == '👊') {
         result = '結果： あなたの勝利！';
         consecutiveVictories++;
-      } else if (jansen[randomJan] == '✋' && userHand == '👊' ||
-          jansen[randomJan] == '👊' && userHand == '✌️' ||
-          jansen[randomJan] == '✌️' && userHand == '✋') {
+      } else if (rivalHand == '✋' && userHand == '👊' ||
+          rivalHand == '👊' && userHand == '✌️' ||
+          rivalHand == '✌️' && userHand == '✋') {
         result = '結果： 残念負けです';
         consecutiveVictoriesReset();
       }
@@ -62,9 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   reset() {
     setState(() {
-      randomJan = 3;
       result = '';
       userHand = '❓';
+      rivalHand = '❓';
       consecutiveVictoriesReset();
     });
   }
@@ -101,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(fontSize: 30),
             ),
             Text(
-              jansen[randomJan],
+              rivalHand,
               style: TextStyle(fontSize: 100),
             ),
             const SizedBox(
@@ -152,5 +153,22 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {}),
     );
+  }
+}
+
+enum Hand {
+  rock,
+  scissors,
+  paper;
+
+  String get text {
+    switch (this) {
+      case Hand.rock:
+        return '👊';
+      case Hand.scissors:
+        return '✌️';
+      case Hand.paper:
+        return '✋';
+    }
   }
 }
