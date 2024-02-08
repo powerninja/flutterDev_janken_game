@@ -33,9 +33,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final jansen = ['👊', '✌️', '✋', ''];
+  final jansen = ['👊', '✌️', '✋', '❓'];
   int randomJan = 3;
-  String userHand = '';
+  String userHand = '❓';
   String result = '';
   int consecutiveVictories = 0;
 
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       randomJan = 3;
       result = '';
-      userHand = '';
+      userHand = '❓';
       consecutiveVictoriesReset();
     });
   }
