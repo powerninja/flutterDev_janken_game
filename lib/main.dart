@@ -33,39 +33,46 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String myHand = '❓';
-  String result = '';
   int consecutiveVictories = 0;
-  String rivalHand = '❓';
 
-  run(String myHandNow) {
+  Hand? myHand;
+  Hand? computerHand;
+  Result? result;
+
+//じゃんけんボタン押下時
+  run() {
     var random = math.Random();
     setState(() {
       final randomJan = random.nextInt(3);
-      myHand = myHandNow;
 
-      rivalHand = Hand.values[randomJan].text;
-      if (rivalHand == myHand) {
-        result = Result.draw.text;
-      } else if (rivalHand == '👊' && myHand == '✋' ||
-          rivalHand == '✋' && myHand == '✌️' ||
-          rivalHand == '✌️' && myHand == '👊') {
-        result = Result.win.text;
-        consecutiveVictories++;
-      } else if (rivalHand == '✋' && myHand == '👊' ||
-          rivalHand == '👊' && myHand == '✌️' ||
-          rivalHand == '✌️' && myHand == '✋') {
-        result = Result.lose.text;
-        consecutiveVictoriesReset();
-      }
+      computerHand = Hand.values[randomJan];
+      matchUpProcessing();
     });
   }
 
+//結果判定処理
+  matchUpProcessing() {
+    if (computerHand == myHand) {
+      result = Result.draw;
+    } else if (computerHand?.text == '👊' && myHand?.text == '✋' ||
+        computerHand?.text == '✋' && myHand?.text == '✌️' ||
+        computerHand?.text == '✌️' && myHand?.text == '👊') {
+      result = Result.win;
+      consecutiveVictories++;
+    } else if (computerHand?.text == '✋' && myHand?.text == '👊' ||
+        computerHand?.text == '👊' && myHand?.text == '✌️' ||
+        computerHand?.text == '✌️' && myHand?.text == '✋') {
+      result = Result.lose;
+      consecutiveVictoriesReset();
+    }
+  }
+
+//リセット
   reset() {
     setState(() {
-      result = '';
-      myHand = '❓';
-      rivalHand = '❓';
+      myHand = null;
+      result = null;
+      computerHand = null;
       consecutiveVictoriesReset();
     });
   }
@@ -93,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              result,
+              result?.text ?? '',
               style: TextStyle(fontSize: 30),
             ),
             Text('$consecutiveVictories連勝'),
@@ -102,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(fontSize: 30),
             ),
             Text(
-              rivalHand,
+              computerHand?.text ?? '❓',
               style: TextStyle(fontSize: 100),
             ),
             const SizedBox(
@@ -113,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(fontSize: 30),
             ),
             Text(
-              myHand,
+              myHand?.text ?? '❓',
               style: TextStyle(fontSize: 200),
             ),
             Center(
@@ -122,21 +129,24 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    run('👊');
+                    myHand = Hand.rock;
+                    run();
                   },
                   child: const Text('👊'),
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () {
-                    run('✌️');
+                    myHand = Hand.scissors;
+                    run();
                   },
                   child: const Text('✌️'),
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () {
-                    run('✋');
+                    myHand = Hand.paper;
+                    run();
                   },
                   child: const Text('✋'),
                 )
