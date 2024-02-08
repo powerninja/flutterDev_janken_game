@@ -46,16 +46,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
       rivalHand = Hand.values[randomJan].text;
       if (rivalHand == userHand) {
-        result = '結果： 引き分け';
+        result = Result.draw.text;
       } else if (rivalHand == '👊' && userHand == '✋' ||
           rivalHand == '✋' && userHand == '✌️' ||
           rivalHand == '✌️' && userHand == '👊') {
-        result = '結果： あなたの勝利！';
+        result = Result.win.text;
         consecutiveVictories++;
       } else if (rivalHand == '✋' && userHand == '👊' ||
           rivalHand == '👊' && userHand == '✌️' ||
           rivalHand == '✌️' && userHand == '✋') {
-        result = '結果： 残念負けです';
+        result = Result.lose.text;
         consecutiveVictoriesReset();
       }
     });
@@ -156,6 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+//じゃんけんの手持ちを管理
 enum Hand {
   rock,
   scissors,
@@ -169,6 +170,24 @@ enum Hand {
         return '✌️';
       case Hand.paper:
         return '✋';
+    }
+  }
+}
+
+//結果を管理
+enum Result {
+  win,
+  lose,
+  draw;
+
+  String get text {
+    switch (this) {
+      case Result.win:
+        return '結果： あなたの勝利！';
+      case Result.lose:
+        return '結果： 残念負けです';
+      case Result.draw:
+        return '結果： 引き分け';
     }
   }
 }
