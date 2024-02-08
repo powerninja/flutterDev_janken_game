@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:janken_game/result_page.dart';
 import 'firebase_options.dart';
 
 void main() {
@@ -161,7 +162,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {}),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => resultPage()),
+        );
+      }),
     );
   }
 }
