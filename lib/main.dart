@@ -112,6 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
     //TODO: どこかに過去の連勝記録の値を保存する
     //TODO: CPUが悩む動作などあればよさそう
     //TODO: ルーレット機能など
+    //TODO: 連勝数を出した方が良い
+    //TODO: DBに日時を追加する
+    //TODO:あいこの数と勝利数をプラスして表示する
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -208,16 +211,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                          title: const Text('Enter Something'),
+                          title: const Text('プレイヤー名を入力してください'),
                           content: const TextField(
                             autofocus: true,
                             decoration: InputDecoration(
-                              hintText: 'Type here...',
+                              hintText: '山田 太郎...',
                             ),
                           ),
                           actions: <Widget>[
                             TextButton(
-                                child: const Text('Close'),
+                                child: const Text('閉じる'),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 })
