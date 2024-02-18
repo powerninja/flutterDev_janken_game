@@ -6,7 +6,6 @@ import 'firebase_options.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'DBHelper.dart';
-import 'dart:math' as math;
 
 void main() {
   runApp(const MyApp());
