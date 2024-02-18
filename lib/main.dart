@@ -35,6 +35,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int consecutiveVictories = 0;
+  // TextEditingControllerのインスタンスを作成
+  final TextEditingController _controller = TextEditingController();
+  // 入力されたテキストを格納する変数
+  String _inputText = '';
 
   Hand? myHand;
   Hand? computerHand;
@@ -85,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (consecutiveVictories != 0) {
       //insert処理
       Memo memo = Memo(
-          text: 'じゃむおじさん',
+          text: _inputText,
           id: randomId,
           rpsConsecutiveWins: consecutiveVictories);
       await Memo.insertMemo(memo);
@@ -112,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('じゃんけん✊'),
+        title: Text('$_inputText さん : じゃんけん✊'),
       ),
       body: Center(
         child: Column(
@@ -129,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               computerHand?.text ?? '❓',
-              style: TextStyle(fontSize: 100),
+              style: const TextStyle(fontSize: 100),
             ),
             const SizedBox(
               height: 80,
@@ -206,12 +210,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     builder: (BuildContext context) {
                       return AlertDialog(
                           title: const Text('プレイヤー名を入力してください'),
-                          content: const TextField(
-                            autofocus: true,
-                            decoration: InputDecoration(
-                              hintText: '山田 太郎...',
-                            ),
-                          ),
+                          content: TextField(
+                              autofocus: true,
+                              decoration: const InputDecoration(
+                                hintText: '山田 太郎...',
+                              ),
+                              controller: _controller),
                           actions: <Widget>[
                             TextButton(
                                 child: const Text('閉じる'),
@@ -220,7 +224,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                 }),
                             TextButton(
                                 onPressed: () {
-                                  print('a');
+                                  Navigator.of(context).pop();
+                                  setState(() {
+                                    _inputText = _controller.text;
+                                  });
                                 },
                                 child: const Text('変更'))
                           ]);
