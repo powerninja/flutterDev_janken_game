@@ -223,7 +223,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: const Text('閉じる'),
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                })
+                                }),
+                            TextButton(
+                                onPressed: () {
+                                  print('a');
+                                },
+                                child: const Text('変更'))
                           ]);
                     });
               },
