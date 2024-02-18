@@ -193,21 +193,38 @@ class _MyHomePageState extends State<MyHomePage> {
               backgroundColor: Colors.blue,
               label: "連勝数を確認する",
               onTap: () {
-                // Navigator.pushNamed(context, "/create_group");
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ResultPage()),
                 );
               },
-              labelStyle: TextStyle(fontWeight: FontWeight.w500)),
+              labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
           SpeedDialChild(
               child: const Icon(Icons.edit),
               backgroundColor: Colors.green,
               label: "プレイヤー名を変更する",
               onTap: () {
-                Navigator.pushNamed(context, "/search_group");
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                          title: const Text('Enter Something'),
+                          content: const TextField(
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              hintText: 'Type here...',
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                                child: const Text('Close'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                })
+                          ]);
+                    });
               },
-              labelStyle: TextStyle(fontWeight: FontWeight.w500)),
+              labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
         ],
       ),
     );
