@@ -27,7 +27,9 @@ class ResultPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 Memo memo = memos[index];
                 return ListTile(
-                  title: Text('連勝数：' + memo.rpsConsecutiveWins.toString()),
+                  title: Text('連勝数：${memo.rpsConsecutiveWins}連勝'),
+                  subtitle: Text(memo.text),
+                  leading: const Icon(Icons.account_circle),
                   // その他メモの詳細を表示
                 );
               },
