@@ -110,88 +110,99 @@ class _MyHomePageState extends State<MyHomePage> {
     //TODO: CPUが悩む動作などあればよさそう
     //TODO: ルーレット機能など
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('じゃんけん✊'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              result?.text ?? '',
-              style: TextStyle(fontSize: 30),
-            ),
-            Text('$consecutiveVictories連勝'),
-            const Text(
-              '相手',
-              style: TextStyle(fontSize: 30),
-            ),
-            Text(
-              computerHand?.text ?? '❓',
-              style: TextStyle(fontSize: 100),
-            ),
-            const SizedBox(
-              height: 80,
-            ),
-            const Text(
-              '自分',
-              style: TextStyle(fontSize: 30),
-            ),
-            Text(
-              myHand?.text ?? '❓',
-              style: TextStyle(fontSize: 200),
-            ),
-            Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    myHand = Hand.rock;
-                    run();
-                  },
-                  child: const Text('👊'),
-                ),
-                const SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    myHand = Hand.scissors;
-                    run();
-                  },
-                  child: const Text('✌️'),
-                ),
-                const SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    myHand = Hand.paper;
-                    run();
-                  },
-                  child: const Text('✋'),
-                )
-              ],
-            )),
-            ElevatedButton(
-              onPressed: () {
-                reset();
-              },
-              child: const Text('リセット'),
-            )
-          ],
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: const Text('じゃんけん✊'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ResultPage()),
-          );
-        },
-        child: const Icon(
-          Icons.assignment,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                result?.text ?? '',
+                style: TextStyle(fontSize: 30),
+              ),
+              Text('$consecutiveVictories連勝'),
+              const Text(
+                '相手',
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                computerHand?.text ?? '❓',
+                style: TextStyle(fontSize: 100),
+              ),
+              const SizedBox(
+                height: 80,
+              ),
+              const Text(
+                '自分',
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                myHand?.text ?? '❓',
+                style: TextStyle(fontSize: 200),
+              ),
+              Center(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      myHand = Hand.rock;
+                      run();
+                    },
+                    child: const Text('👊'),
+                  ),
+                  const SizedBox(width: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      myHand = Hand.scissors;
+                      run();
+                    },
+                    child: const Text('✌️'),
+                  ),
+                  const SizedBox(width: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      myHand = Hand.paper;
+                      run();
+                    },
+                    child: const Text('✋'),
+                  )
+                ],
+              )),
+              ElevatedButton(
+                onPressed: () {
+                  reset();
+                },
+                child: const Text('リセット'),
+              )
+            ],
+          ),
         ),
-      ),
-    );
+        floatingActionButton:
+            Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ResultPage()),
+              );
+            },
+            child: const Icon(
+              Icons.assignment,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              // FAB 2を押したときに行いたい処理
+            },
+            child: const Icon(Icons.edit),
+          ),
+        ]));
   }
 }
 
