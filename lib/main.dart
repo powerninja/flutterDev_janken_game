@@ -180,12 +180,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ResultPage()),
-        );
-      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ResultPage()),
+          );
+        },
+        child: const Icon(
+          Icons.assignment,
+        ),
+      ),
     );
   }
 }
