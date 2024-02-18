@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'package:firebase_core/firebase_core.dart';
 import 'package:janken_game/result_page.dart';
-import 'firebase_options.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 import 'DBHelper.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 void main() {
