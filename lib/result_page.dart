@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'DBHelper.dart';
 
 class ResultPage extends StatelessWidget {
-  ResultPage({Key? key}) : super(key: key);
+  const ResultPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('結果表示'),
+        title: const Text('結果表示'),
       ),
       body: FutureBuilder<List<Memo>>(
         future: Memo.getMemos(), // DBHelperから非同期でメモを取得
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // データの取得中に表示するウィジェット
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             // エラーが発生した場合に表示するウィジェット
-            return Center(child: Text('エラーが発生しました'));
+            return const Center(child: Text('エラーが発生しました'));
           } else if (snapshot.hasData) {
             // データが正常に取得できた場合に表示するウィジェット
             List<Memo> memos = snapshot.data!;
@@ -36,7 +36,7 @@ class ResultPage extends StatelessWidget {
             );
           } else {
             // データが空の場合に表示するウィジェット
-            return Center(child: Text('データがありません'));
+            return const Center(child: Text('データがありません'));
           }
         },
       ),
