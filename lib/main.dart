@@ -40,6 +40,21 @@ class _MyHomePageState extends State<MyHomePage> {
   // 入力されたテキストを格納する変数
   String _inputText = '';
 
+  //画面が初期化された際に実行される処理
+  @override
+  void initState() {
+    super.initState();
+    //get
+    Future.delayed(Duration.zero, () async {
+      //TODO: 最後に入力された名前を取得したい
+      _memoList = await Memo.getMemos();
+      for (Memo m in _memoList) {
+        _inputText = m.text;
+      }
+      setState(() {}); // 状態が更新されたことをFlutterに通知
+    });
+  }
+
   Hand? myHand;
   Hand? computerHand;
   Result? result;
